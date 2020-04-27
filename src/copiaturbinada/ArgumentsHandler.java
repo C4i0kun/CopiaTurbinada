@@ -12,19 +12,22 @@ package copiaturbinada;
  * @brief Class responsible for handling entry arguments
  */
 abstract class ArgumentsHandler {
+	private static boolean exitOnError;
 	
 	private static int argumentIndex = 0;
 	
-	public static void Handle(String[] args) {
+	public static void Handle(String[] args, boolean exitOnError) {
+		ArgumentsHandler.exitOnError = exitOnError;
+		
 		try {
-			if (args[argumentIndex] == "-origem") {
+			if (args[argumentIndex].contentEquals("-origem")) {
 				HandleInput(args);
 				HandleOutput(args);
-			} else if (args[argumentIndex] == "-destino") {
+			} else if (args[argumentIndex].contentEquals("-destino")) {
 				HandleOutput(args);
 				HandleInput(args);
 			} else {
-				throw new InvalidArgumentException(args[argumentIndex], true);
+				throw new InvalidArgumentException(args[argumentIndex], exitOnError);
 			}
 		} catch (InvalidArgumentException e) {
 			e.showMessage();
@@ -33,23 +36,23 @@ abstract class ArgumentsHandler {
 	
 	private static void HandleInput(String[] args) throws InvalidArgumentException {
 		argumentIndex++;
-		if (args[argumentIndex] == "-arquivo") {
+		if (args[argumentIndex].contentEquals("-arquivo")) {
 			fileHandler(args, true);
-		} else if (args[argumentIndex] == "-teclado") {
-			//PEGA A ENTRADA DO TECLADO
+		} else if (args[argumentIndex].contentEquals("-teclado")) {
+			InputHandler.setInputOption(InputOptions.KEYBOARD);
 		} else {
-			throw new InvalidArgumentException(args[argumentIndex], true);
+			throw new InvalidArgumentException(args[argumentIndex], exitOnError);
 		}
 	}
 	
 	private static void HandleOutput(String[] args) throws InvalidArgumentException {
 		argumentIndex++;
-		if (args[argumentIndex] == "-arquivo") {
+		if (args[argumentIndex].contentEquals("-arquivo")) {
 			fileHandler(args, false);
-		} else if (args[argumentIndex] == "-tela") {
+		} else if (args[argumentIndex].contentEquals("-tela")) {
 			//IMPRIME A ENTRADA NA TELA
 		} else {
-			throw new InvalidArgumentException(args[argumentIndex], true);
+			throw new InvalidArgumentException(args[argumentIndex], exitOnError);
 		}
 	}
 	
@@ -77,7 +80,7 @@ abstract class ArgumentsHandler {
 			//PEGA A SENHA!
 			argumentIndex++;
 		} else {
-			throw new InvalidArgumentException(args[argumentIndex], true);
+			throw new InvalidArgumentException(args[argumentIndex], exitOnError);
 		}
 	}
 	

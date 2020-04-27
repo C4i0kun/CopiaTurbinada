@@ -26,7 +26,7 @@ public class InvalidArgumentException extends IOException {
 	}
 	
 	public void showMessage() {
-		System.out.println("ERROR: Argument " + this.invalidArg + "is invalid!");
+		System.out.println("ERROR: Argument " + this.invalidArg + " is invalid!");
 		
 		if (this.exit == true) {
 			System.exit(0);
