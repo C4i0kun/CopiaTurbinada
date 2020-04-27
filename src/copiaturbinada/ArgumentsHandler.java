@@ -58,7 +58,7 @@ abstract class ArgumentsHandler {
 		if (args[argumentIndex].contentEquals("-arquivo")) {
 			fileHandler(args, false);
 		} else if (args[argumentIndex].contentEquals("-tela")) {
-			//IMPRIME A ENTRADA NA TELA
+			OutputHandler.setOutputOption(OutputOptions.SCREEN);
 		} else {
 			throw new InvalidArgumentException(args[argumentIndex], exitOnError);
 		}
@@ -66,20 +66,33 @@ abstract class ArgumentsHandler {
 	
 	private static void fileHandler(String[] args, boolean input) throws InvalidArgumentException {
 		argumentIndex++;
+		
+		FileExtensions fileExtension = FileExtensions.TXT;
+		
 		if (args[argumentIndex] == "-comprimido") {
 			//SINALIZA QUE O ARQUIVO É COMPRIMIDO
+			fileExtension = FileExtensions.ZIP;
 			argumentIndex++;
 			if (args[argumentIndex] == "-criptografado") {
 				//SINALIZA QUE É CRIPTOGRAFADO
+				fileExtension = FileExtensions.ZIP_CRIPT;
 				encryptedInput(args);
 			}
 		} else if (args[argumentIndex] == "-criptografado") {
 			//SINALIZA QUE É CRIPTOGRAFADO
+			fileExtension = FileExtensions.CRIPT;
 			encryptedInput(args);
 		}
 		
-		InputHandler.setInputOption(InputOptions.FILE);
-		InputHandler.setFileName("../" + args[argumentIndex]);
+		if (input) {
+			InputHandler.setInputOption(InputOptions.FILE);
+			InputHandler.setFileName("../" + args[argumentIndex]);
+			InputHandler.setFileExtension(fileExtension);
+		} else {
+			OutputHandler.setOutputOption(OutputOptions.FILE);
+			OutputHandler.setFileName("../" + args[argumentIndex]);
+			OutputHandler.setFileExtension(fileExtension);
+		}
 	}
 	
 	private static void encryptedInput(String[] args) throws InvalidArgumentException {

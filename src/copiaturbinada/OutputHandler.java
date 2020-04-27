@@ -14,12 +14,12 @@ public abstract class OutputHandler {
 		OutputHandler.fileName = fileName;
 	}
 
-	public static void setOUtputOption(InputOptions outputOption) {
+	public static void setOutputOption(OutputOptions outputOption) {
 		OutputHandler.outputOption = outputOption;
 	}
 	
 	public static void setFileExtension(FileExtensions fileExtension) {
-
+		OutputHandler.fileExtension = fileExtension;
 	}
 	
 	public static Output getOutput() {
@@ -27,7 +27,7 @@ public abstract class OutputHandler {
 		case FILE:
 			switch (fileExtension) {
 			case TXT:
-				break;
+				return new TXTOutput();
 			case CRIPT:
 				break;
 			case ZIP:
@@ -38,7 +38,7 @@ public abstract class OutputHandler {
 				break;
 			}
 		case SCREEN:
-			return new KeyboardInput();
+			return new ScreenOutput();
 		default:
 			break;
 		}
