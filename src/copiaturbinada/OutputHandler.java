@@ -1,7 +1,7 @@
 package copiaturbinada;
 
-public abstract class InputHandler {
-	private static InputOptions inputOption;
+public abstract class OutputHandler {
+	private static OutputOptions outputOption;
 	private static FileExtensions fileExtension;
 	
 	private static String fileName;
@@ -11,23 +11,23 @@ public abstract class InputHandler {
 	}
 	
 	public static void setFileName(String fileName) {
-		InputHandler.fileName = fileName;
+		OutputHandler.fileName = fileName;
 	}
 
-	public static void setInputOption(InputOptions inputOption) {
-		InputHandler.inputOption = inputOption;
+	public static void setOUtputOption(InputOptions outputOption) {
+		OutputHandler.outputOption = outputOption;
 	}
 	
 	public static void setFileExtension(FileExtensions fileExtension) {
-		InputHandler.fileExtension = fileExtension;
+
 	}
 	
-	public static Input getInput() {
-		switch (inputOption) {
+	public static Output getOutput() {
+		switch (outputOption) {
 		case FILE:
 			switch (fileExtension) {
 			case TXT:
-				return new TXTInput();
+				break;
 			case CRIPT:
 				break;
 			case ZIP:
@@ -37,7 +37,7 @@ public abstract class InputHandler {
 			default:
 				break;
 			}
-		case KEYBOARD:
+		case SCREEN:
 			return new KeyboardInput();
 		default:
 			break;
@@ -45,5 +45,4 @@ public abstract class InputHandler {
 		
 		return null;
 	}
-
 }

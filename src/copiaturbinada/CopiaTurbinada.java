@@ -15,7 +15,7 @@ public class CopiaTurbinada {
 
 	public static void main(String[] args) {
 		ArgumentsHandler.Handle(args, true);
-		
+		System.out.print(InputHandler.getInput().input());
 	}
 
 }

@@ -22,15 +22,23 @@ abstract class ArgumentsHandler {
 		try {
 			if (args[argumentIndex].contentEquals("-origem")) {
 				HandleInput(args);
+				argumentIndex++;
 				HandleOutput(args);
 			} else if (args[argumentIndex].contentEquals("-destino")) {
 				HandleOutput(args);
+				argumentIndex++;
 				HandleInput(args);
 			} else {
 				throw new InvalidArgumentException(args[argumentIndex], exitOnError);
 			}
 		} catch (InvalidArgumentException e) {
 			e.showMessage();
+		} catch (ArrayIndexOutOfBoundsException e) {
+			System.out.println("Not enough arguments!");
+			
+			if (exitOnError) {
+				System.exit(0);
+			}
 		}
 	}
 	
@@ -70,7 +78,8 @@ abstract class ArgumentsHandler {
 			encryptedInput(args);
 		}
 		
-		//PEGA O ARQUIVO
+		InputHandler.setInputOption(InputOptions.FILE);
+		InputHandler.setFileName("../" + args[argumentIndex]);
 	}
 	
 	private static void encryptedInput(String[] args) throws InvalidArgumentException {
