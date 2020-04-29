@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class TXTOutput implements Output {
+public class FileOutput implements Output {
 
 	@Override
 	public void output(String input) {

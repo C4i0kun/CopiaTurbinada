@@ -26,14 +26,14 @@ public abstract class InputHandler {
 		switch (inputOption) {
 		case FILE:
 			switch (fileExtension) {
-			case TXT:
-				return new TXTInput();
+			case GENERAL:
+				return new FileInput();
 			case CRIPT:
-				break;
+				return new EncryptedInputDecorator(new FileInput());
 			case ZIP:
-				break;
+				return new ZipInputDecorator(new FileInput());
 			case ZIP_CRIPT:
-				break;
+				return new EncryptedInputDecorator(new ZipInputDecorator(new FileInput()));
 			default:
 				break;
 			}

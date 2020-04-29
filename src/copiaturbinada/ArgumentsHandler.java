@@ -67,18 +67,18 @@ abstract class ArgumentsHandler {
 	private static void fileHandler(String[] args, boolean input) throws InvalidArgumentException {
 		argumentIndex++;
 		
-		FileExtensions fileExtension = FileExtensions.TXT;
+		FileExtensions fileExtension = FileExtensions.GENERAL;
 		
-		if (args[argumentIndex] == "-comprimido") {
+		if (args[argumentIndex].contentEquals("-comprimido")) {
 			//SINALIZA QUE O ARQUIVO É COMPRIMIDO
 			fileExtension = FileExtensions.ZIP;
 			argumentIndex++;
-			if (args[argumentIndex] == "-criptografado") {
+			if (args[argumentIndex].contentEquals("-criptografado")) {
 				//SINALIZA QUE É CRIPTOGRAFADO
 				fileExtension = FileExtensions.ZIP_CRIPT;
 				encryptedInput(args);
 			}
-		} else if (args[argumentIndex] == "-criptografado") {
+		} else if (args[argumentIndex].contentEquals("-criptografado")) {
 			//SINALIZA QUE É CRIPTOGRAFADO
 			fileExtension = FileExtensions.CRIPT;
 			encryptedInput(args);
@@ -97,7 +97,7 @@ abstract class ArgumentsHandler {
 	
 	private static void encryptedInput(String[] args) throws InvalidArgumentException {
 		argumentIndex++;
-		if (args[argumentIndex] == "-senha") {
+		if (args[argumentIndex].contentEquals("-senha")) {
 			argumentIndex++;
 			//PEGA A SENHA!
 			argumentIndex++;

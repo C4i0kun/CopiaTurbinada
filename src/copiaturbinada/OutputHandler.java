@@ -26,8 +26,8 @@ public abstract class OutputHandler {
 		switch (outputOption) {
 		case FILE:
 			switch (fileExtension) {
-			case TXT:
-				return new TXTOutput();
+			case GENERAL:
+				return new FileOutput();
 			case CRIPT:
 				break;
 			case ZIP:

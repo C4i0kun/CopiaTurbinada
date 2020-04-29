@@ -1,7 +1,7 @@
 package copiaturbinada;
 
 public enum FileExtensions {
-	TXT,
+	GENERAL,
 	ZIP,
 	CRIPT,
 	ZIP_CRIPT,

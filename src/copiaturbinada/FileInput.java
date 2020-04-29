@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class TXTInput implements Input{
+public class FileInput implements Input{
 
 	@Override
 	public String input() {
