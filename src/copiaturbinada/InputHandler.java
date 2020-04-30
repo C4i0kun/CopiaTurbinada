@@ -3,11 +3,16 @@ package copiaturbinada;
 public abstract class InputHandler {
 	private static InputOptions inputOption;
 	private static FileExtensions fileExtension;
+	private static String key;
 	
 	private static String fileName;
 	
 	public static String getFileName() {
 		return fileName;
+	}
+
+	public static String getKey() {
+		return key;
 	}
 	
 	public static void setFileName(String fileName) {
@@ -20,6 +25,10 @@ public abstract class InputHandler {
 	
 	public static void setFileExtension(FileExtensions fileExtension) {
 		InputHandler.fileExtension = fileExtension;
+	}
+	
+	public static void setKey(String key) {
+		InputHandler.key = key;
 	}
 	
 	public static Input getInput() {

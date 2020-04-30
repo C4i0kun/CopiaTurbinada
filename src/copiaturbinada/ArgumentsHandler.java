@@ -99,7 +99,7 @@ abstract class ArgumentsHandler {
 		argumentIndex++;
 		if (args[argumentIndex].contentEquals("-senha")) {
 			argumentIndex++;
-			//PEGA A SENHA!
+			InputHandler.setKey(args[argumentIndex]);
 			argumentIndex++;
 		} else {
 			throw new InvalidArgumentException(args[argumentIndex], exitOnError);
