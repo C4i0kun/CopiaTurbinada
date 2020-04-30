@@ -7,11 +7,11 @@ import java.io.File;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import copiaturbinada.FileExtensions;
-import copiaturbinada.InputHandler;
-import copiaturbinada.InputOptions;
-import copiaturbinada.OutputHandler;
-import copiaturbinada.OutputOptions;
+import copiaturbinada.enums.FileExtensions;
+import copiaturbinada.enums.InputOptions;
+import copiaturbinada.enums.OutputOptions;
+import copiaturbinada.input.InputHandler;
+import copiaturbinada.output.OutputHandler;
 
 class CryptoUtilsTest {
 	static String message;
