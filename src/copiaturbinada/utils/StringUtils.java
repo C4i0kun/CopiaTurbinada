@@ -9,4 +9,24 @@ public abstract class StringUtils {
 		}
 		return String.copyValueOf(array);
 	}
+	
+	public static String to16Bytes(String entry) {
+		char[] array = new char[16];
+		
+		for (int i = 0; i < entry.length(); i++) {
+			if (i >= 16) {
+				break;
+			}
+			
+			array[i] = entry.charAt(i);
+		}
+		
+		if (entry.length() < 16) {
+			for (int i = entry.length(); i < 16; i++) {
+				array[i] = ' ';
+			}
+		}
+		
+		return String.copyValueOf(array);
+	}
 }

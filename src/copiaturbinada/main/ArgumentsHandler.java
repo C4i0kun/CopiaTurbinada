@@ -14,6 +14,7 @@ import copiaturbinada.enums.OutputOptions;
 import copiaturbinada.exceptions.InvalidArgumentException;
 import copiaturbinada.input.InputHandler;
 import copiaturbinada.output.OutputHandler;
+import copiaturbinada.utils.StringUtils;
 
 /**
  * @brief Class responsible for handling entry arguments
@@ -107,9 +108,9 @@ abstract class ArgumentsHandler {
 		if (args[argumentIndex].contentEquals("-senha")) {
 			argumentIndex++;
 			if (input) {
-				InputHandler.setKey(args[argumentIndex]);
+				InputHandler.setKey(StringUtils.to16Bytes(args[argumentIndex]));
 			} else {
-				OutputHandler.setKey(args[argumentIndex]);
+				OutputHandler.setKey(StringUtils.to16Bytes(args[argumentIndex]));
 			}
 			argumentIndex++;
 		} else {
