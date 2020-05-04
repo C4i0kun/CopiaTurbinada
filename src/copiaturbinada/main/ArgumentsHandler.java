@@ -94,11 +94,11 @@ abstract class ArgumentsHandler {
 		
 		if (input) {
 			InputHandler.setInputOption(InputOptions.FILE);
-			InputHandler.setFileName("../" + args[argumentIndex]);
+			InputHandler.setFileName(args[argumentIndex]);
 			InputHandler.setFileExtension(fileExtension);
 		} else {
 			OutputHandler.setOutputOption(OutputOptions.FILE);
-			OutputHandler.setFileName("../" + args[argumentIndex]);
+			OutputHandler.setFileName(args[argumentIndex]);
 			OutputHandler.setFileExtension(fileExtension);
 		}
 	}

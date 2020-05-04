@@ -12,6 +12,7 @@ public class EncryptedOutputDecorator extends OutputDecorator {
 		super(output);
 	}
 
+	@Override
 	public void output(String input) {
 		String oldFileName = OutputHandler.getFileName();
 		String newFileName = StringUtils.takeExtensionAway(OutputHandler.getFileName());

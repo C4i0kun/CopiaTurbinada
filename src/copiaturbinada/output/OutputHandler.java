@@ -17,6 +17,10 @@ public abstract class OutputHandler {
 		return key;
 	}
 	
+	public static FileExtensions getFileExtension() {
+		return fileExtension;
+	}
+	
 	public static void setFileName(String fileName) {
 		OutputHandler.fileName = fileName;
 	}
@@ -42,9 +46,9 @@ public abstract class OutputHandler {
 			case CRIPT:
 				return new EncryptedOutputDecorator(new FileOutput());
 			case ZIP:
-				break;
+				return new ZipOutputDecorator(new FileOutput());
 			case ZIP_CRIPT:
-				break;
+				return new EncryptedOutputDecorator(new ZipOutputDecorator(new FileOutput()));
 			default:
 				break;
 			}
