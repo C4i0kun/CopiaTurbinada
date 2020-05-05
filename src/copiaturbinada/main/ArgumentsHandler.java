@@ -12,6 +12,7 @@ import copiaturbinada.enums.FileExtensions;
 import copiaturbinada.enums.InputOptions;
 import copiaturbinada.enums.OutputOptions;
 import copiaturbinada.exceptions.InvalidArgumentException;
+import copiaturbinada.exceptions.InvalidExtensionException;
 import copiaturbinada.input.InputHandler;
 import copiaturbinada.output.OutputHandler;
 import copiaturbinada.utils.StringUtils;
@@ -41,6 +42,8 @@ abstract class ArgumentsHandler {
 			}
 		} catch (InvalidArgumentException e) {
 			e.showMessage();
+		} catch (InvalidExtensionException e) {
+			e.showMessage();
 		} catch (ArrayIndexOutOfBoundsException e) {
 			System.out.println("Not enough arguments!");
 			
@@ -50,7 +53,7 @@ abstract class ArgumentsHandler {
 		}
 	}
 	
-	private static void HandleInput(String[] args) throws InvalidArgumentException {
+	private static void HandleInput(String[] args) throws InvalidArgumentException, InvalidExtensionException {
 		argumentIndex++;
 		if (args[argumentIndex].contentEquals("-arquivo")) {
 			fileHandler(args, true);
@@ -61,7 +64,7 @@ abstract class ArgumentsHandler {
 		}
 	}
 	
-	private static void HandleOutput(String[] args) throws InvalidArgumentException {
+	private static void HandleOutput(String[] args) throws InvalidArgumentException, InvalidExtensionException {
 		argumentIndex++;
 		if (args[argumentIndex].contentEquals("-arquivo")) {
 			fileHandler(args, false);
@@ -72,7 +75,7 @@ abstract class ArgumentsHandler {
 		}
 	}
 	
-	private static void fileHandler(String[] args, boolean input) throws InvalidArgumentException {
+	private static void fileHandler(String[] args, boolean input) throws InvalidArgumentException, InvalidExtensionException {
 		argumentIndex++;
 		
 		FileExtensions fileExtension = FileExtensions.GENERAL;
@@ -93,13 +96,21 @@ abstract class ArgumentsHandler {
 		}
 		
 		if (input) {
-			InputHandler.setInputOption(InputOptions.FILE);
-			InputHandler.setFileName(args[argumentIndex]);
-			InputHandler.setFileExtension(fileExtension);
+			if (validFileExtension(args[argumentIndex], fileExtension)) {
+				InputHandler.setInputOption(InputOptions.FILE);
+				InputHandler.setFileName(args[argumentIndex]);
+				InputHandler.setFileExtension(fileExtension);				
+			} else {
+				throw new InvalidExtensionException(args[argumentIndex], fileExtension, true);
+			}
 		} else {
-			OutputHandler.setOutputOption(OutputOptions.FILE);
-			OutputHandler.setFileName(args[argumentIndex]);
-			OutputHandler.setFileExtension(fileExtension);
+			if (validFileExtension(args[argumentIndex], fileExtension)) {
+				OutputHandler.setOutputOption(OutputOptions.FILE);
+				OutputHandler.setFileName(args[argumentIndex]);
+				OutputHandler.setFileExtension(fileExtension);
+			} else {
+				throw new InvalidExtensionException(args[argumentIndex], fileExtension, true);
+			}
 		}
 	}
 	
@@ -116,6 +127,21 @@ abstract class ArgumentsHandler {
 		} else {
 			throw new InvalidArgumentException(args[argumentIndex], exitOnError);
 		}
+	}
+	
+	private static boolean validFileExtension(String fileName, FileExtensions fileExtension) {
+		switch(fileExtension) {
+		case ZIP:
+			return (StringUtils.getExtension(fileName).contentEquals(".zip"));
+		case CRIPT:
+			return (StringUtils.getExtension(fileName).contentEquals(".cript"));
+		case ZIP_CRIPT:
+			return (StringUtils.getExtension(fileName).contentEquals(".zip.cript"));
+		default:
+			break;
+		}
+		
+		return true;
 	}
 	
 }

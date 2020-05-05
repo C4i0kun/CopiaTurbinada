@@ -29,4 +29,21 @@ public abstract class StringUtils {
 		
 		return String.copyValueOf(array);
 	}
+	
+	public static String getExtension(String fileName) {
+		int index = fileName.indexOf('.');
+		
+		if (index == -1) {
+			return "";
+		}
+		
+		int arraySize = fileName.length() - index;
+		char[] array = new char[arraySize];
+		
+		for (int i = 0; i < arraySize; i++) {
+			array[i] = fileName.charAt(index + i);
+		}
+		
+		return String.copyValueOf(array);
+	}
 }

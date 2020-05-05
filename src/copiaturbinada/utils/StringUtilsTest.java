@@ -40,4 +40,19 @@ class StringUtilsTest {
 	void testTO16Bytes3() {
 		assertEquals("lets test it now", StringUtils.to16Bytes("lets test it now because i'm tired"));
 	}
+	
+	@Test
+	void testGetExtension1() {
+		assertEquals(".zip", StringUtils.getExtension("Example.zip"));
+	}
+	
+	@Test
+	void testGetExtension2() {
+		assertEquals(".cript", StringUtils.getExtension("Example.cript"));
+	}
+	
+	@Test
+	void testGetExtension3() {
+		assertEquals(".zip.cript", StringUtils.getExtension("Example.zip.cript"));
+	}
 }

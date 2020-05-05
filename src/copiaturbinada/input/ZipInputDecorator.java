@@ -9,7 +9,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
-import copiaturbinada.utils.StringUtils;
 
 public class ZipInputDecorator extends InputDecorator {
 
